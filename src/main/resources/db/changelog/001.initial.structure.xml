@@ -1,0 +1,47 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet author="Gabriele D'Antimi" id="1">
+        <createTable tableName="USERS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="SECTORS">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="PARENT_SECTOR" type="BIGINT">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+        <createTable tableName="USERS_SECTORS">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="USERS_SECTORS__USER_ID"
+                             references="USERS(ID)" />
+            </column>
+            <column name="SECTOR_ID" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="USERS_SECTORS__SECTOR_ID"
+                             references="SECTORS(ID)" />
+            </column>
+
+        </createTable>
+
+        <addUniqueConstraint tableName="USERS_SECTORS" columnNames="USER_ID, SECTOR_ID" />
+    </changeSet>
+</databaseChangeLog>
