@@ -1,0 +1,323 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Gabriele D'Antimi" id="1">
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Manufacturing"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Construction materials"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Electronics and Optics"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Food and Beverage"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Bakery &amp; confectionery products"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Beverages"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Fish &amp; fish products "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Meat &amp; meat products"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Milk &amp; dairy products "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Other"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Sweets &amp; snack food"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Food and Beverage')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Furniture"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Bathroom/sauna "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Bedroom"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Children’s room "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Kitchen "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Living room "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Office"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Other (Furniture"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Outdoor "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Project furniture"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Furniture')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Machinery"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Machinery components"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Machinery equipment/tools"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Manufacture of machinery "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Maritime"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Aluminium and steel workboats "/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Maritime')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Boat/Yacht building"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Maritime')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Ship repair and conversion"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Maritime')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Metal structures"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Other"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Repair and maintenance service"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Machinery')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Metalworking"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Construction of metal structures"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metalworking')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Houses and buildings"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metalworking')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Metal products"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metalworking')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Metal works"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metalworking')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="CNC-machining"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metal works')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Forgings, Fasteners"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metal works')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Gas, Plasma, Laser cutting"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metal works')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="MIG, TIG, Aluminum welding"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Metal works')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Plastic and Rubber"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Packaging"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic and Rubber')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Plastic goods"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic and Rubber')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Plastic processing technology"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic and Rubber')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Blowing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic processing technology')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Moulding"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic processing technology')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Plastics welding and processing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic processing technology')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Plastic profiles"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Plastic and Rubber')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Printing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Advertising"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Printing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Book/Periodicals printing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Printing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Labelling and packaging printing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Printing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Textile and Clothing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Clothing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Textile and Clothing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Textile"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Textile and Clothing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Wood"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Manufacturing')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Other (Wood)"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Wood')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Wooden building materials"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Wood')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Wooden houses"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Wood')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Other"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Creative industries"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Other' AND PARENT_SECTOR_ID IS NULL)"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Energy technology"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Other' AND PARENT_SECTOR_ID IS NULL)"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Environment"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Other' AND PARENT_SECTOR_ID IS NULL)"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Service"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Business services"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Service')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Engineering"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Service')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Information Technology and Telecommunications"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Service')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Data processing, Web portals, E-marketing"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Information Technology and Telecommunications')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Programming, Consultancy"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Information Technology and Telecommunications')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Software, Hardware"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Information Technology and Telecommunications')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Telecommunications"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Information Technology and Telecommunications')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Tourism"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Service')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Translation services"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Service')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Transport and Logistics"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Service')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Air"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Transport and Logistics')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Rail"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Transport and Logistics')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Road"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Transport and Logistics')"/>
+        </insert>
+        <insert tableName="SECTORS">
+            <column name="NAME" value="Water"/>
+            <column name="PARENT_SECTOR_ID" valueComputed="(SELECT ID FROM SECTORS WHERE NAME = 'Transport and Logistics')"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

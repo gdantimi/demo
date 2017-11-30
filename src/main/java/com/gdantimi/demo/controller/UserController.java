@@ -24,10 +24,10 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> find(@PathVariable Long id){
-        User user = userService.findUser(id);
+        User user = userService.find(id);
         if(user == null){
             return new ResponseEntity<>(NOT_FOUND);
         }
-        return new ResponseEntity<User>(user, OK);
+        return new ResponseEntity<>(user, OK);
     }
 }

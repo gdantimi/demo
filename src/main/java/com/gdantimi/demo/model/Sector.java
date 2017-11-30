@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -22,6 +23,12 @@ public class Sector {
 
     @Column(name = "NAME")
     private String name;
+
+    @Column(name = "PARENT_SECTOR_ID")
+    private Long parentSectorId;
+
+    @OneToMany(mappedBy = "parentSectorId")
+    private List<Sector> children;
 
 
 }
