@@ -7,4 +7,7 @@
 
     <include file="/db/changelog/migrations/001.initial.structure.xml"/>
     <include file="/db/changelog/migrations/002.initial.data.xml"/>
+    <include file="/db/changelog/migrations/003.remove.id.from.user_sectors.xml"/>
+    <include file="/db/changelog/migrations/004.add.field.users.terms.agreed.xml"/>
+
 </databaseChangeLog>

@@ -1,11 +1,13 @@
 package com.gdantimi.demo.service;
 
-import com.gdantimi.demo.model.Sector;
+import com.gdantimi.demo.model.entity.Sector;
 import com.gdantimi.demo.repository.SectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static org.apache.commons.collections.IteratorUtils.toList;
 
 @Service
 public class SectorService {
@@ -23,5 +25,10 @@ public class SectorService {
 
     public List<Sector> findAll(){
         return sectorRepository.findAllByParentSectorIdIsNull();
+    }
+
+    public List<Sector> findAllById(List<Long> sectorsIds) {
+        Iterable<Sector> sectors = sectorRepository.findAll(sectorsIds);
+        return toList(sectors.iterator());
     }
 }

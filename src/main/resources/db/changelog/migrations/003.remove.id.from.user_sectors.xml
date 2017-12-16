@@ -1,0 +1,10 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="Gabriele D'Antimi" id="3" failOnError="true">
+        <dropColumn tableName="USERS_SECTORS" columnName="ID" />
+        <addPrimaryKey tableName="USERS_SECTORS" columnNames="USER_ID, SECTOR_ID" constraintName="PK__USER_SECTORS" />
+    </changeSet>
+</databaseChangeLog>

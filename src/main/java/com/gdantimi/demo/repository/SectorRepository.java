@@ -1,13 +1,15 @@
 package com.gdantimi.demo.repository;
 
-import com.gdantimi.demo.model.Sector;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.gdantimi.demo.model.entity.Sector;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface SectorRepository extends JpaRepository<Sector, Long>{
+public interface SectorRepository extends CrudRepository<Sector, Long> {
 
     List<Sector> findAllByParentSectorIdIsNull();
+
+    List<Sector> findAllById(List<Long> sectorsIds);
 }

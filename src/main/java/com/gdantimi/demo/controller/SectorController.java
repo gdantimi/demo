@@ -1,6 +1,6 @@
 package com.gdantimi.demo.controller;
 
-import com.gdantimi.demo.model.Sector;
+import com.gdantimi.demo.model.entity.Sector;
 import com.gdantimi.demo.service.SectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/sectors/")
+@RequestMapping("/sectors")
 public class SectorController {
 
     @Autowired
@@ -33,9 +33,16 @@ public class SectorController {
         return new ResponseEntity<>(sector, OK);
     }
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<List<Sector>> findAll(){
         List<Sector> sector = sectorService.findAll();
+        return new ResponseEntity<>(sector, OK);
+    }
+
+
+    @GetMapping("/findAllByIds")
+    public ResponseEntity<List<Sector>> findAllById(@RequestParam List<Long> sectorIds){
+        List<Sector> sector = sectorService.findAllById(sectorIds);
         return new ResponseEntity<>(sector, OK);
     }
 }

@@ -1,4 +1,4 @@
-package com.gdantimi.demo.model;
+package com.gdantimi.demo.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USERS")
-public class User {
+@Table(name = "SECTORS")
+public class Sector {
 
     @GeneratedValue
     @Id
@@ -24,7 +24,10 @@ public class User {
     @Column(name = "NAME")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "USERS_SECTORS", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "SECTOR_ID", referencedColumnName = "ID"))
-    private List<Sector> sectors;
+    @Column(name = "PARENT_SECTOR_ID")
+    private Long parentSectorId;
+
+    @OneToMany(mappedBy = "parentSectorId")
+    private List<Sector> children;
+
 }
