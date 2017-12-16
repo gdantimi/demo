@@ -5,9 +5,11 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet author="Gabriele D'Antimi" id="4" failOnError="true">
         <addColumn tableName="USERS">
-            <column name="TERMS_AGREED" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
+            <column name="TERMS_AGREED" type="BOOLEAN" />
         </addColumn>
+        <update tableName="USERS">
+            <column name="TERMS_AGREED" value="TRUE"/>
+        </update>
+        <addNotNullConstraint tableName="USERS" columnDataType="BOOLEAN" columnName="TERMS_AGREED"/>
     </changeSet>
 </databaseChangeLog>
