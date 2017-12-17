@@ -33,12 +33,11 @@ public class SectorController {
         return new ResponseEntity<>(sector, OK);
     }
 
-    @GetMapping("/findAll")
+    @GetMapping
     public ResponseEntity<List<Sector>> findAll(){
         List<Sector> sector = sectorService.findAll();
         return new ResponseEntity<>(sector, OK);
     }
-
 
     @GetMapping("/findAllByIds")
     public ResponseEntity<List<Sector>> findAllById(@RequestParam List<Long> sectorIds){

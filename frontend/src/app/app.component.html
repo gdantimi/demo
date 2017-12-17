@@ -602,35 +602,65 @@
       <label for="form-name">Name</label>
       <input class="form-control" type="text" placeholder="Name" id="form-name"
              name="name"
+             minlength="4"
+             maxlength="255"
              required
+             #formName="ngModel"
              [(ngModel)]="user.name" >
+      <div *ngIf="formName.invalid && (formName.dirty || formName.touched || userForm.submitted)" class="alert alert-danger">
+        <div *ngIf="formName.errors.required">
+          Name is required.
+        </div>
+        <div *ngIf="formName.errors.minlength">
+          Name must be at least 4 characters long.
+        </div>
+        <div *ngIf="formName.errors.maxlength">
+          Name must be at most 255 characters long.
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="form-sectors">Sectors</label>
       <select multiple id="form-sectors" class="form-control" name="sectorsIds"
+              required
+              #formSectors="ngModel"
               [(ngModel)]="user.sectorsIds">
 
-        <ng-template #recursiveList let-sectors>
+        <ng-template #recursiveList let-sectors let-nestedLevel="nestedLevel">
           <ng-container *ngFor="let sector of sectors">
             <ng-template #leaf>
-              <option value="{{sector.id}}">{{sector.name}}</option>
+              <option value="{{sector.id}}" [ngStyle]="{ 'padding-left.px': nestedLevel * 30 }">{{sector.name}}</option>
+
+              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: sector.children, nestedLevel: nestedLevel + 1}"></ng-container>
             </ng-template>
+
             <optgroup *ngIf="!sector.parentSectorId; else leaf" label="{{sector.name}}">
-              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: sector.children }"></ng-container>
+              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: sector.children, nestedLevel: 0}"></ng-container>
             </optgroup>
           </ng-container>
         </ng-template>
         <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: sectors }"></ng-container>
       </select>
+      <div *ngIf="formSectors.invalid && (formSectors.dirty || formSectors.touched || userForm.submitted)" class="alert alert-danger">
+        <div *ngIf="formSectors.errors.required">
+          It is required to select one or more sectors
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="form-terms">Accept terms</label>
       <input type="checkbox" id="form-terms" name="termsAgreed"
              required
+             #formTermsAgreed="ngModel"
              [(ngModel)]="user.termsAgreed">
+      <div *ngIf="formTermsAgreed.invalid && (formTermsAgreed.dirty || formTermsAgreed.touched || userForm.submitted)" class="alert alert-danger">
+        <div *ngIf="formTermsAgreed.errors.required">
+          It is required to accept the terms
+        </div>
+      </div>
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-primary" (click)="send()">Save</button>
+      <button [disabled]="userForm.invalid" type="submit" class="btn btn-primary">Save</button>
     </div>
   </form>
 
