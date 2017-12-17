@@ -1,12 +1,19 @@
 import {Component} from '@angular/core';
+import {User} from './user';
+import {NgForm} from '@angular/forms';
+import {UserService} from './userService';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [UserService]
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(private userService: UserService) { }
+
+  user = new User(1, '2', [1, 2], true);
   sectors = [
     {
       'id': 1,
@@ -48,6 +55,11 @@ export class AppComponent {
     }
   ];
 
+  onSubmit (data: NgForm) {
+    console.log('Register user');
+    console.log(data.value);
+    this.userService.saveUser(data.value);
+  }
   public send() {
     console.log('Clicked');
   }
