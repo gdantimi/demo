@@ -16,14 +16,25 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserDto save(UserDto user){
-        User userEntity = mapper.map(user, User.class);
-        userRepository.save(userEntity);
-        user = mapper.map(userEntity, UserDto.class);
-        return user;
+    public UserDto save(UserDto userDto){
+        User user = mapper.map(userDto, User.class);
+        userRepository.save(user);
+        userDto = mapper.map(user, UserDto.class);
+        return userDto;
     }
 
-    public User find(Long id){
-        return userRepository.findOne(id);
+    public UserDto find(Long id){
+        User user = userRepository.findOne(id);
+        return mapper.map(user, UserDto.class);
+    }
+
+    public User update(UserDto userDto) {
+        User user = userRepository.findOne(userDto.getId());
+        if(user == null){
+            return null;
+        }
+        mapper.map(userDto, user);
+        return userRepository.save(user);
+
     }
 }

@@ -7,13 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/users/")
@@ -23,19 +17,26 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDto> save(@RequestBody @Valid UserDto user, HttpServletRequest request, HttpServletResponse response){
-        Cookie[] cookies = request.getCookies();
-        user = userService.save(user);
-        response.addCookie(new Cookie("test", "2"));
-        return new ResponseEntity<>(user, OK);
+    public ResponseEntity<UserDto> save(@RequestBody @Valid UserDto userDto) {
+        userDto = userService.save(userDto);
+        return ResponseEntity.ok(userDto);
+    }
+
+    @PutMapping
+    public ResponseEntity<UserDto> update(@RequestBody @Valid UserDto userDto) {
+        User user = userService.update(userDto);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> find(@PathVariable Long id){
-        User user = userService.find(id);
+    public ResponseEntity<UserDto> find(@PathVariable Long id){
+        UserDto user = userService.find(id);
         if(user == null){
-            return new ResponseEntity<>(NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(user, OK);
+        return ResponseEntity.ok(user);
     }
 }
