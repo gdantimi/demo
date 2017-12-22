@@ -2,11 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from './user';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import {environment} from "../environments/environment";
 
 
 @Injectable()
 export class UserService {
+
+  apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) {
   }
 
@@ -16,20 +19,14 @@ export class UserService {
 
     if (userId) {
       userData.id = userId;
-      this.http.put('http://localhost:8080/users/', userData)
-        .subscribe();
+      return this.http.put(`${this.apiUrl}/users/`, userData);
     } else {
-      this.http.post('http://localhost:8080/users/', userData)
-        .map(response => response as User)
-        .subscribe(
-          (data) => localStorage.setItem('userId', data.id.toString()),
-          (error) => console.log(error)
-        );
+      return this.http.post(`${this.apiUrl}/users/`, userData);
     }
   }
 
   findUser(id: string): Observable<User> {
-    return this.http.get(`http://localhost:8080/users/${id}`)
+    return this.http.get(`${this.apiUrl}/users/${id}`)
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 

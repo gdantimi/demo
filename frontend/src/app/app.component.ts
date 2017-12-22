@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import {UserService} from './userService';
 import {SectorService} from './sectorService';
 import {Sector} from "./sector";
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,16 @@ export class AppComponent implements OnInit {
     if (userForm.valid) {
       console.log('Register user');
       console.log(userForm.value);
-      this.userService.saveUser(userForm.value);
+      this.userService.saveUser(userForm.value)
+        .map(response => response as User)
+        .subscribe(
+          (data) => localStorage.setItem('userId', data.id.toString()),
+          (error) => {
+            let remoteError = error.error.errors[0];
+            userForm.controls[remoteError.field].setErrors({'uniqueConstrainViolation': true})
+            console.log(remoteError.defaultMessage);
+          }
+        );
     } else {
       console.log('There are errors in the form');
     }
@@ -53,7 +63,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  clearSession(){
+  clearSession() {
     localStorage.clear();
   }
 

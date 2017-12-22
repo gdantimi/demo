@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
+@EnableWebMvc
 @ControllerAdvice
 public class RestErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(BAD_REQUEST)
     @ResponseBody
-    public RestError processValidationError(MethodArgumentNotValidException ex) {
-        BindingResult result = ex.getBindingResult();
+    public RestError processValidationError(MethodArgumentNotValidException e) {
+        BindingResult result = e.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
         List<ErrorDetail> errorDetails = fieldErrors.stream()
                 .map(fieldError -> ErrorDetail.builder()
