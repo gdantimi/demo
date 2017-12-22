@@ -53,4 +53,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+  clearSession(){
+    localStorage.clear();
+  }
+
 }
