@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
-import {CookieService} from 'angular2-cookie/core';
 import {User} from './user';
 import {Observable} from 'rxjs/Observable';
-import {RequestOptions} from '@angular/http';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class UserService {

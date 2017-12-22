@@ -15,7 +15,6 @@ export class SectorService {
   getSectors(): Observable<Sector[]> {
     return this.http.get('http://localhost:8080/sectors/')
       .catch((error: any) => Observable.throw(error || 'Server error'));
-
   }
 
 }

@@ -3,23 +3,23 @@ import {User} from './user';
 import {NgForm} from '@angular/forms';
 import {UserService} from './userService';
 import {SectorService} from './sectorService';
-import {CookieService} from 'angular2-cookie/core';
+import {Sector} from "./sector";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService, SectorService, CookieService]
+  providers: [UserService, SectorService]
 })
 export class AppComponent implements OnInit {
-
   constructor(private userService: UserService,
-              private sectorService: SectorService) { }
+              private sectorService: SectorService) {
+  }
 
-  user = new User();
-  sectors = [];
+  user: User = new User();
+  sectors: Sector[] = [];
 
-  onSubmit (userForm: NgForm) {
+  onSubmit(userForm: NgForm) {
     if (userForm.valid) {
       console.log('Register user');
       console.log(userForm.value);
@@ -30,18 +30,25 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadSectors();
+    this.loadUser();
+  }
+
+  private loadSectors() {
     this.sectorService.getSectors()
       .subscribe(
         sectors => this.sectors = sectors,
         err => console.log(err)
-        );
+      );
+  }
 
+  private loadUser() {
     const userId = localStorage.getItem('userId');
 
     if (userId) {
       this.userService.findUser(userId).subscribe(
         user => this.user = user,
-        err => console.log(err)
+        err => console.log(err),
       );
     }
   }

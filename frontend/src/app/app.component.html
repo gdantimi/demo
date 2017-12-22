@@ -629,7 +629,7 @@
         <ng-template #recursiveList let-sectors let-nestedLevel="nestedLevel">
           <ng-container *ngFor="let sector of sectors">
             <ng-template #leaf>
-              <option value="{{sector.id}}" [ngStyle]="{ 'padding-left.px': nestedLevel * 30 }">{{sector.name}}</option>
+              <option [ngValue]="sector.id" [ngStyle]="{ 'padding-left.px': nestedLevel * 30 }">{{sector.name}}</option>
 
               <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: sector.children, nestedLevel: nestedLevel + 1}"></ng-container>
             </ng-template>

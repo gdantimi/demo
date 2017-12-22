@@ -1,8 +1,7 @@
 export class User {
   id: number;
   name: string;
-  sectorsIds: number[];
+  sectorsIds: number[] = [];
   termsAgreed: boolean;
   constructor() {  }
-
 }
