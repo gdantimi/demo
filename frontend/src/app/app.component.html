@@ -23,7 +23,6 @@
           Name is required.
         </div>
         <div *ngIf="formName.errors.minlength">
-          {{formName.errors | json}}
           Name must be at least 4 characters long.
         </div>
         <div *ngIf="formName.errors.maxlength">
@@ -80,5 +79,6 @@
       <button type="button" class="btn btn-danger" (click)="clearSession();userForm.reset()">Clear session</button>
     </div>
   </form>
+  <alert></alert>
 
 </div>

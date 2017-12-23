@@ -1,4 +1,4 @@
-import {ErrorDetail} from "./error.Detail";
+import {ErrorDetail} from "./error.detail";
 
 export class Error {
   message: string;

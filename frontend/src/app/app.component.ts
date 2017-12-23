@@ -1,47 +1,81 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './user';
 import {NgForm} from '@angular/forms';
-import {UserService} from './userService';
-import {SectorService} from './sectorService';
-import {Sector} from "./sector";
+import {AlertService} from "./service/alertService";
+import {UserService} from "./service/userService";
+import {SectorService} from "./service/sectorService";
 import 'rxjs/add/operator/map';
+import {User} from "./model/user";
+import {Sector} from "./model/sector";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService, SectorService]
+  providers: [UserService, SectorService, AlertService]
 })
 export class AppComponent implements OnInit {
   constructor(private userService: UserService,
-              private sectorService: SectorService) {
+              private sectorService: SectorService,
+              private alertService: AlertService) {
   }
 
   user: User = new User();
   sectors: Sector[] = [];
 
+  ngOnInit(): void {
+    this.loadSectors();
+    this.loadUser();
+    this.alertService
+  }
+
   onSubmit(userForm: NgForm) {
     if (userForm.valid) {
-      console.log('Register user');
-      console.log(userForm.value);
-      this.userService.saveUser(userForm.value)
-        .map(response => response as User)
-        .subscribe(
-          (data) => localStorage.setItem('userId', data.id.toString()),
-          (error) => {
-            let remoteError = error.error.errors[0];
-            userForm.controls[remoteError.field].setErrors({'uniqueConstrainViolation': true})
-            console.log(remoteError.defaultMessage);
-          }
-        );
+      const userId = localStorage.getItem('userId');
+      const userData = userForm.value;
+
+      if (userId) {
+        userData.id = userId;
+        this.updateUser(userData, userForm);
+      } else {
+        this.saveUser(userData, userForm);
+      }
+
     } else {
       console.log('There are errors in the form');
     }
   }
 
-  ngOnInit(): void {
-    this.loadSectors();
-    this.loadUser();
+  private updateUser(userData: any, userForm: NgForm) {
+    this.userService.updateUser(userData)
+      .map(response => response as User)
+      .subscribe(
+        () => {
+          this.alertService.success("User updated!")
+        },
+        (error) => {
+          this.handleError(error, userForm);
+        }
+      );
+  }
+
+  private saveUser(userData: any, userForm: NgForm) {
+    this.userService.saveUser(userData)
+      .map(response => response as User)
+      .subscribe(
+        (data) => {
+          localStorage.setItem('userId', data.id.toString());
+          this.alertService.success("User saved!")
+        },
+        (error) => {
+          this.handleError(error, userForm)
+        }
+      );
+  }
+
+  private handleError(error, userForm: NgForm) {
+    let remoteError = error.error.errors[0];
+    userForm.controls[remoteError.field].setErrors({'uniqueConstrainViolation': true});
+    console.log(remoteError.defaultMessage);
   }
 
   private loadSectors() {
