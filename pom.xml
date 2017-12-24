@@ -42,7 +42,7 @@
                             <outputDirectory>backend/target/classes/static/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>frontend/test/</directory>
+                                    <directory>frontend/dist/</directory>
                                 </resource>
                             </resources>
                         </configuration>
