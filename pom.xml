@@ -39,10 +39,10 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>./backend/target/classes/static/</outputDirectory>
+                            <outputDirectory>backend/target/classes/static/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>./frontend/dist/</directory>
+                                    <directory>frontend/dist/</directory>
                                 </resource>
                             </resources>
                         </configuration>
