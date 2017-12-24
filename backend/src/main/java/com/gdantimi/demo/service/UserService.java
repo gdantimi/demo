@@ -6,8 +6,10 @@ import com.gdantimi.demo.repository.UserRepository;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -23,8 +25,12 @@ public class UserService {
         return userDto;
     }
 
+    @Transactional(readOnly = true)
     public UserDto find(Long id){
         User user = userRepository.findOne(id);
+        if (user == null) {
+            return null;
+        }
         return mapper.map(user, UserDto.class);
     }
 

@@ -24,7 +24,7 @@ public class User {
     @Column(name = "NAME")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany
     @JoinTable(name = "USERS_SECTORS",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "SECTOR_ID", referencedColumnName = "ID"))

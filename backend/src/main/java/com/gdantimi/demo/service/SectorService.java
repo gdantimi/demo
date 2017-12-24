@@ -31,4 +31,8 @@ public class SectorService {
         Iterable<Sector> sectors = sectorRepository.findAll(sectorsIds);
         return toList(sectors.iterator());
     }
+
+    public boolean exists(Long sectorId) {
+        return sectorRepository.exists(sectorId);
+    }
 }

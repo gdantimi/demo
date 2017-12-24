@@ -2,6 +2,7 @@ package com.gdantimi.demo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdantimi.demo.model.dto.UserDto;
+import com.gdantimi.demo.service.SectorService;
 import com.gdantimi.demo.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import static java.lang.Boolean.TRUE;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
@@ -29,11 +31,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)
 public class UserControllerUnitTest {
     public static final int MAX_NAME_SIZE = 255;
+
     @Autowired
     private UserController userController;
 
     @MockBean
     private UserService userService;
+
+    @MockBean
+    private SectorService sectorService;
 
     @Autowired
     private ObjectMapper mapper;
@@ -125,6 +131,7 @@ public class UserControllerUnitTest {
                 .build();
 
         when(userService.save(eq(user))).thenReturn(responseUser);
+        when(sectorService.exists(anyLong())).thenReturn(true);
 
         mockMvc.perform(post("/users/")
                 .contentType(APPLICATION_JSON_UTF8)
@@ -132,5 +139,31 @@ public class UserControllerUnitTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name", is(name)))
                 .andExpect(jsonPath("id", is(notNullValue())));
+    }
+
+    @Test
+    public void shouldReturnBadRequestResponseWhenSectorsIdsAreWrong() throws Exception {
+        String name = "name";
+        UserDto user = UserDto.builder()
+                .name(name)
+                .sectorsIds(singletonList(1L))
+                .termsAgreed(TRUE)
+                .build();
+
+        UserDto responseUser = UserDto.builder()
+                .id(1L)
+                .name(name)
+                .build();
+
+        when(userService.save(eq(user))).thenReturn(responseUser);
+        when(sectorService.exists(anyLong())).thenReturn(false);
+
+        mockMvc.perform(post("/users/")
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(mapper.writeValueAsString(user)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("errors", iterableWithSize(1)))
+                .andExpect(jsonPath("errors[0].field", is("sectorsIds")))
+                .andExpect(jsonPath("errors[0].rejectedValue", is(contains(1))));
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <USERS ID="1" NAME="Name" TERMS_AGREED="true"/>
+    <USERS_SECTORS USER_ID="1" SECTOR_ID="1"/>
+    <USERS_SECTORS USER_ID="1" SECTOR_ID="2"/>
+</dataset>
