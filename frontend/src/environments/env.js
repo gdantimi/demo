@@ -1,2 +1,3 @@
-export var environmentPort = process.env.PORT;
-console.log(environmentPort);
+module.exports = {
+  environmentPort: process.env.PORT
+};
