@@ -1,2 +1,2 @@
 var environmentPort = process.env.PORT;
-console.out(environmentPort);
+console.log(environmentPort);
