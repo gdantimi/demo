@@ -6,6 +6,7 @@ import {SectorService} from "./service/sectorService";
 import 'rxjs/add/operator/map';
 import {User} from "./model/user";
 import {Sector} from "./model/sector";
+import {environment} from "../environments/environment.prod";
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
 
   user: User = new User();
   sectors: Sector[] = [];
+  serverPortNumber = environment.apiUrl;
 
   ngOnInit(): void {
     this.loadSectors();
