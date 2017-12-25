@@ -1,4 +1,4 @@
-#Structure
+# Structure
 
 The project is a Maven project structured in 2 modules: backend and frontend.
 
@@ -10,7 +10,7 @@ Also, the generated jar is executable on Ubuntu/CentOS systems.
 The session is kept by using LocalStorage from client side. When a user registers, his/her id is saved inside the 
 localStorage and if it is present the data is sent to the update endpoint instead the save endpoint.
 
-##Backend
+## Backend
 The backend is developed using java and the following tech stack:
 
 * Springboot
@@ -31,14 +31,14 @@ JPA and Hibernate were used to persist the data inside the database.
 
 Dozer was chosen as mapper, for the mappings between DTOs and Entities.
 
-##Frontend
+## Frontend
 
 The frontend is built using Angular2 framework and Bootstrap library for the UI style.
 
 Building the hierarchical select was the hardest part, due to the recursive nature of the procedure to generate it 
 from the data.
 
-#Database
+# Database
 
 The choosen database is H2 in file mode, the application will create the database file inside the user's home directory.
 
@@ -56,14 +56,14 @@ The user has only 3 fields (ID, NAME, TERMS_AGREED) even though TERMS_AGREED cou
 be registered without having accepted the terms. This could be checked from endpoint side, with some validation.
 
 
-#Improvements
+# Improvements
 
 A lot of tests are missing, like service tests and domain tests.
 The groovy library Spock could be used in order to generate more tests quickly.
 
 The UI part has no tests at all and logging is missing.
 
-#Build
+# Build
 
 To build the project is necessary to have NPM and Node installed.
 
