@@ -67,10 +67,11 @@ The UI part has no tests at all and logging is missing.
 
 To build the project is necessary to have NPM and Node installed.
 
-1. Move inside the `frontend` folder and run `npm run build`
-2. This generates the `dist` folder inside the `frontend` project, that will be automatically copied by Maven inside 
+1. Move inside the `frontend` folder and run `npm install`
+2. Run `npm run build`
+3. This generates the `dist` folder inside the `frontend` project, that will be automatically copied by Maven inside 
 the `backend` project.
-3. Inside the `backend` folder, run mvn package to create the jar file
-4. Inside the `target` folder the file `backend-0.0.1-SNAPSHOT.jar` is generated and can be launched with the command
+4. Inside the `backend` folder, run mvn package to create the jar file
+5. Inside the `target` folder the file `backend-0.0.1-SNAPSHOT.jar` is generated and can be launched with the command
 `./backend-0.0.1-SNAPSHOT.jar` on Ubuntu/CentOS systems, or `java -jar backend-0.0.1-SNAPSHOT.jar` on others 
 
